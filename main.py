@@ -40,7 +40,7 @@ def split_mp3(input_file, output_folder, segment_duration=600):
     print("MP3 splitting complete.")
 
 
-def process_all_mp3_files(input_directory, output_directory):
+def process_all_mp3_files(input_directory):
     """Process all MP3 files in the input directory, create a folder for each file's parts, and split them into segments."""
 
     # Iterate through all files in the input directory
@@ -51,7 +51,7 @@ def process_all_mp3_files(input_directory, output_directory):
 
             # Create a folder inside the output directory to store the parts of the current MP3 file
             output_folder = os.path.join(
-                output_directory, os.path.splitext(filename)[0] + '_parts')
+                input_directory, os.path.splitext(filename)[0])
 
             # Ensure the output folder exists
             if not os.path.exists(output_folder):
@@ -64,13 +64,12 @@ def process_all_mp3_files(input_directory, output_directory):
 
 def main(argv):
     if len(sys.argv) < 1:
-        print('Usage: main.py <input directory> [segment duration]')
+        print('Usage: main.py <input directory>')
         sys.exit(1)
 
     input_directory = argv[1]
-    # segment_duration = float(argv[2]) * 60
 
-    process_all_mp3_files(input_directory, input_directory)
+    process_all_mp3_files(input_directory)
 
 
 if __name__ == '__main__':
